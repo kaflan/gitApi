@@ -1,0 +1,17 @@
+{
+  "name": "ishues",
+  "version": "0.0.1",
+  "description": "nema",
+  "main": "Grunt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "issuess"
+  ],
+  "author": "kaflan",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint-plugin-angular": "^0.5.0"
+  }
+}
