@@ -9,12 +9,11 @@
 </head>
 
 <body>
-	<header class="container">
-		<h1>Github issues</h1>
-	</header>
-	<main ng-controller="IssuesCtrl" class="ng-scope">
-		<nav>
-			<ul>
+
+	<main   ng-controller="IssuesCtrl" class="ng-scope">
+		<nav class='row'>
+			<ul class='no-decoration'>
+				<li  ng-repeat="item in data"><a href="">{{item.title}}</a></li>
 				<!-- ngRepeat: bag in bags -->
 			</ul>
 		</nav>

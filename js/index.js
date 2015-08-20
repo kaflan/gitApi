@@ -3,11 +3,11 @@
   'use strict';
   var app = angular.module('gitApi', []);
   app.controller('IssuesCtrl', function($scope, listIssues) {
-    $scope.getData = [];
-    listIssues.getBug().success(function(data){
-      $scope.getData.push(data);
-      console.log(data);
+    $scope.data = [];
+    listIssues.getBug().success(function(data) {
+      $scope.data =  angular.copy(data);
     });
+
   });
   //app.directive('myList', function() {});
 
