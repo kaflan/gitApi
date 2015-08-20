@@ -10,6 +10,7 @@
   src: url("../fonts/Chunkfive-webfont.ttf");
 }
 nav {
+  float: left;
   width: 15%;
   background-color: #00796b;
 }
@@ -61,17 +62,27 @@ nav>ul {
   text-decoration: none;
   list-style-type: none;
 }
+footer {
+  color: #444;
+  text-align: center;
+  border-top: 1px dashed #888;
+  padding: 40px 0;
+}
 .no-decoration {
   text-decoration: none;
   color: #4a1313;
   padding: 0px;
   margin: 0px;
 }
-footer {
-  color: #444;
-  text-align: center;
-  border-top: 1px dashed #888;
-  padding: 40px 0;
+comments {
+  float:left;
+  background-color: red;
+    width: 23%;
+}
+issues {
+  width: 62%;
+  float: left;
+  background: #8bc34a;
 }
 .content {
   padding: 0 20px;
