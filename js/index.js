@@ -10,36 +10,18 @@
       console.log('err');
     });
   });
-  // app.config(['$routeProvider', '$locationProvider',
-  //   function($routeProvide) {
-  //     $routeProvide.when('/', {
-  //       templateURl: 'temlate/issues.html'
-  //     });
-  //   }
-  // ]);
 
   //directive
   app.directive('issues', function() {
     return {
-      restrict: 'AE',
-      replace: true,
-      link: function(){
-        console.log('linked');
-      },
-      templateURl: 'template/issues.html',
-      controller: function($scope){
-        console.log($scope);
-      }
+      restrict: 'E',
+      templateUrl: 'template/issues.html'
     };
   });
   app.directive('comments', function() {
     return {
-      restrict: 'AE',
-      link: function(){
-        console.log('linked');
-      },
-      replace: true,
-      templateURl: 'template/comments.html'
+      restrict: 'E',
+      templateUrl: 'template/comments.html'
     };
   });
   // get issues
