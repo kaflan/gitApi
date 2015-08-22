@@ -43,6 +43,9 @@ header {
   height: 30px;
 }
 img {
+  margin: 2%;
+  width: 30%;
+    float: left;
   box-shadow: 0 5px 5px rgba(244, 122, 167, .5);
 }
 nav>ul>li>a {
@@ -55,6 +58,7 @@ nav>ul>li>a {
   padding: 7%;
 }
 nav>ul>li {
+  overflow-wrap: break-word;
   text-decoration: none;
   list-style-type: none;
 }
