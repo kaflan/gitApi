@@ -17,32 +17,29 @@
     $scope.org = parseUrl.org;
     $scope.repo = parseUrl.repo;
     $scope.number = getIssuesInfo;
-    $scope.data;
     //load storage
     if (list !== null) {
       $scope.data = list;
     } else {
       getListIssues.query().then(function(data) {
         $scope.data = angular.copy(data);
-        // return this;
         console.log($scope.data);
       });
     }
+    console.log('I \'m here');
   });
+
   // Issuess  ctrl
-  app.controller('IssuesCtrl', function($scope,getListIssues, getIssuesInfo) {
-
-    $scope.number = getIssuesInfo;
-
-    var all = [];
-    if (list !== null) {
-      all = list;
-    } else {
-      getListIssues.query().then(function(data) {
-        all = angular.copy(data);
+  app.controller('IssuesCtrl', function($scope, getListIssues, getIssuesInfo) {
+    $scope.number = Number(getIssuesInfo.number);
+    var number = $scope.number;
+    getListIssues.query().then(function() {
+      var issue = list.filter(function(item) {
+        return item.number === number;
       });
-    }
-    console.log(all);
+      if (!issue.length) return;
+      $scope.issue = issue[0];
+    });
   });
   // comments ctrl
   app.controller('CommentsCtrl', function() {
@@ -53,32 +50,19 @@
     function($routeProvider) {
       //costile 
       $routeProvider
-        .when('/:org/:repo', {
+        .when(':/org/:repo/issues', {
+          templateUrl: 'template/nav.html',
           controller: 'ListIssuesCtrl'
         })
-        .when(':org/:repo/issues/:number', {
+        .when('/:org/:repo/issues/:number', {
           templateUrl: 'template/issues.html',
           controller: 'IssuesCtrl'
         })
-        .otherwise({
-          redirectTo: '/:org/:repo'
-        });
+        .otherwhise(
+          redirect : '/:org/:repo/'
+          );
     }
   ]);
-  //directive
-  app.directive('issues', function() {
-    return {
-      restrict: 'E',
-      templateUrl: 'template/issues.html'
-    };
-  });
-  app.directive('comments', function() {
-    return {
-      restrict: 'E',
-      templateUrl: 'template/comments.html'
-    };
-  });
-
   // get issues
   app.service('parseUrl', function($location) {
     var pathUrl = $location.$$path;
@@ -92,7 +76,7 @@
     };
 
   });
-  app.service('getListIssues', function($http, parseUrl) {
+  app.factory('getListIssues', function($http, parseUrl) {
     var url = 'https://api.github.com/repos/' + parseUrl.org + '/' + parseUrl.repo + '/issues';
     return {
       query: function() {
@@ -100,7 +84,6 @@
           list = angular.copy(res.data);
           // list = $scope.data;
           saveStorage();
-          console.log(list);
           return list;
         });
       }
