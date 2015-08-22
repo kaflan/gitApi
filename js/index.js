@@ -2,19 +2,9 @@
 (function() {
   'use strict';
   var list = null;
-  var regExp = /#\/(\w+)\/(\w+)/;
-  var loc = location.hash.match(regExp);
-  var org = loc[1];
-  var repo = loc[2];
-  var regExp2 = /([0-9]+)/;
-  var loc2 = location.hash.match(regExp2);
-  var url = 'https://api.github.com/repos/' + org + '/' + repo + '/issues';
   var app = angular.module('gitApi', ['ngRoute', 'ngResource']);
   var number;
-  //costile 
-  if (loc2 !== null) {
-    number = loc2[1];
-  }
+  //#/codeception/codeception/issue/238 
 
   function saveStorage() {
     localStorage.setItem('list', JSON.stringify(list));
@@ -23,49 +13,55 @@
   function loadStorage() {
     list = JSON.parse(localStorage.getItem('list'));
   }
-  app.controller('ListIssuesCtrl', function($scope, listIssues, $routeParams) {
-    $scope.org = $routeParams.org;
-    $scope.repo = $routeParams.repo;
-    console.log($routeParams.org, $routeParams.repo);
+  app.controller('ListIssuesCtrl', function($scope, getListIssues, parseUrl, getIssuesInfo) {
+    $scope.org = parseUrl.org;
+    $scope.repo = parseUrl.repo;
+    $scope.number = getIssuesInfo;
     $scope.data;
     //load storage
     if (list !== null) {
-      loadStorage();
       $scope.data = list;
+    } else {
+      getListIssues.query().then(function(data) {
+        $scope.data = angular.copy(data);
+        // return this;
+        console.log($scope.data);
+      });
     }
-    listIssues.getBug().success(function(data) {
-      $scope.data = angular.copy(data);
-      list = $scope.data;
-      saveStorage();
-      return false;
-    }).error(function() {
-      document.write('err');
-      return false;
-    });
   });
-// Issuess  ctrl
-  app.controller('IssuesCtrl', function($scope,$location,changeUrl) {
-    console.log(changeUrl);
-    console.log($location.url());
+  // Issuess  ctrl
+  app.controller('IssuesCtrl', function($scope,getListIssues, getIssuesInfo) {
+
+    $scope.number = getIssuesInfo;
+
+    var all = [];
+    if (list !== null) {
+      all = list;
+    } else {
+      getListIssues.query().then(function(data) {
+        all = angular.copy(data);
+      });
+    }
+    console.log(all);
   });
-// comments ctrl
+  // comments ctrl
   app.controller('CommentsCtrl', function() {
 
   });
 
   app.config(['$routeProvider',
     function($routeProvider) {
-      console.log($routeProvider);
+      //costile 
       $routeProvider
         .when('/:org/:repo', {
           controller: 'ListIssuesCtrl'
         })
-        .when('/issues', {
+        .when(':org/:repo/issues/:number', {
           templateUrl: 'template/issues.html',
           controller: 'IssuesCtrl'
         })
         .otherwise({
-          redirectTo: '/'
+          redirectTo: '/:org/:repo'
         });
     }
   ]);
@@ -84,24 +80,41 @@
   });
 
   // get issues
-  app.service('listIssues', function($http) {
+  app.service('parseUrl', function($location) {
+    var pathUrl = $location.$$path;
+    var regExp = /\/(\w+)\/(\w+)/;
+    var loc = pathUrl.match(regExp);
+    var org = loc[1];
+    var repo = loc[2];
     return {
-      getBug: function() {
-        if (org === ' ' || repo === ' ') {
-          document.write('Error adres');
-          return false;
-        }
-        return $http.get(url);
+      org: org,
+      repo: repo
+    };
+
+  });
+  app.service('getListIssues', function($http, parseUrl) {
+    var url = 'https://api.github.com/repos/' + parseUrl.org + '/' + parseUrl.repo + '/issues';
+    return {
+      query: function() {
+        return $http.get(url).then(function(res) {
+          list = angular.copy(res.data);
+          // list = $scope.data;
+          saveStorage();
+          console.log(list);
+          return list;
+        });
       }
     };
   });
-  app.factory('changeUrl', ['$resource',
-    function($resource) {
-      return $resource('/:org/:repo/issues/:number', {
-        org: org,
-        repo: repo,
-        number : number
-      });
+  app.service('getIssuesInfo', function($location) {
+    var pathUrl = $location.$$path;
+    var regExp2 = /([0-9]+)/;
+    var loc = pathUrl.match(regExp2);
+    if (loc !== null) {
+      console.log('issues info number is: ', loc[1]);
+      return {
+        number: loc[1]
+      };
     }
-  ]);
+  });
 })();
