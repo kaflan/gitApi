@@ -5,28 +5,20 @@
 	<meta charset="UTF-8">
 	<title>Api issues</title>
 	<link rel="stylesheet" href="css/main.css">
-	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
 </head>
 
 <body>
-
-	<main ng-controller="IssuesCtrl" class="ng-scope">
-		<nav class='row'>
-			<ul class='no-decoration'>
-				<li ng-repeat="item in data"><a href="">{{item.title}}</a></li>
-			</ul>
-		</nav>
-
-		<issues>
-
-		</issues>
-		<comments>
-			
-		</comments>
+<!-- <ng-view></ng-view> -->
+	<main  class="ng-scope">
+	<div ng-view>
+		<h1>lala</h1>
+	</div>
 
 	</main>
-	<script type="text/javascript" src="bower_components/angular/angular.js">
-	</script>
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script> 
 	<script src="js/index.js"></script>
 
 
