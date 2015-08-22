@@ -58,9 +58,7 @@
           templateUrl: 'template/issues.html',
           controller: 'IssuesCtrl'
         })
-        .otherwhise(
-          redirect : '/:org/:repo/'
-          );
+        .otherwise( {temlpate:'<h1> NO page here<h1>'});
     }
   ]);
   // get issues
