@@ -1,30 +1,38 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="gitApi" >
+<html lang="en" ng-app="gitApi">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Api issues</title>
-	<link rel="stylesheet" href="css/main.css">
-	<script src="bower_components/jquery/dist/jquery.js"></script>
+    <meta charset="UTF-8">
+    <title>Api issues</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
 </head>
 
 <body>
-
-	<main >
-	<input type="text"/>
-	<input type="text"/>
-	<div ng-view>
-		<h1>work??</h1>
-	</div>
-
-	</main>
-	<script src="bower_components/angular/angular.js"></script>
-	<script src="bower_components/angular-route/angular-route.js"></script>
-	<script src="bower_components/angular-resource/angular-resource.js"></script> 
-	<script src="js/index.js"></script>
-
-
-
+    <div ng-controller="SearchRepoCtrl">
+        <div ng-hide='startPage' class="form-main ">
+            <form ng-submit="searchRepo()">
+                <div class="col-6">
+                    <input type="text" ng-model="org" placeholder="Name of organization" />
+                </div>
+                <div class="col-6">
+                    <input type="text" ng-model="repo" placeholder="Repository of organization" />
+                </div>
+                <div class="col-offset-3 col-3">
+                    <h2>Search repo</h2>
+                    <input type="submit" value='submit'>
+                </div>
+            </form>
+        </div>
+        <div ng-show='startPage'>
+            <ng-view></ng-view>
+        </div>
+    </div>
+    </main>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
