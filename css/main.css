@@ -21,7 +21,8 @@ body {
   margin: 0;
 }
 p {
-  font-family: 0.5em chunk;
+  overflow-wrap: break-word;
+  font-family: chunk;
 }
 h1 {
   text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15);
@@ -34,6 +35,9 @@ h1 {
   font-weight: 300;
   letter-spacing: 20px;
 }
+h2 {
+  font-weight: 300;
+}
 header {
   font-weight: bold;
   text-shadow: 0 1px 0 rgba(244, 122, 167, .7);
@@ -45,7 +49,7 @@ header {
 img {
   margin: 2%;
   width: 30%;
-    float: left;
+  float: left;
   box-shadow: 0 5px 5px rgba(244, 122, 167, .5);
 }
 nav>ul>li>a {
@@ -78,10 +82,20 @@ footer {
   padding: 0px;
   margin: 0px;
 }
+.center {
+
+}
+form {
+  display: block;
+}
+.form-main {
+  margin-top: 10%;
+  margin-left: 20%;
+}
 comments {
-  float:left;
+  float: left;
   background-color: red;
-    width: 23%;
+  width: 23%;
 }
 issues {
   width: 62%;
@@ -98,12 +112,11 @@ issues {
 }
 [class*="col"] {
   float: left;
-  display: inline;
-  margin-right: 20px;
+  display: inline-block;
 }
 [class*="col"]:last-child {
   margin-right: 0;
-  float: right;
+  float: left;
 }
 .row {
   margin-bottom: 20px;
@@ -155,7 +168,6 @@ issues {
 }
 
 /* offset */
-
 .col-offset-1 {
   margin-left: 8.33333333%;
 }
