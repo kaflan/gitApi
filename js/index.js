@@ -23,7 +23,6 @@
       });
       if (!issue.length) return;
       $scope.issue = issue[0];
-      console.log($scope.issue);
     });
   });
 
