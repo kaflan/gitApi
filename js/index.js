@@ -2,23 +2,28 @@
 (function() {
   'use strict';
   var app = angular.module('gitApi', ['ngRoute', 'ngResource']);
-  app.controller('GetListIssuesCtrl', function($scope,
-    getListIssues) {
-    console.log('work get list');
-    getListIssues.query().then(function(data) {
+
+  app.controller('GetIssuesCtrl', function($scope, getListIssues, $routeParams) {
+    $scope.startPage = true;
+    $scope.org = $routeParams.org;
+    $scope.repo = $routeParams.repo;
+    getListIssues.query($routeParams.org, $routeParams.repo).then(function(data) {
       $scope.data = angular.copy(data);
     });
   });
 
-  app.controller('IssuesCtrl', function($scope, getListIssues, $routeParams) {
+  app.controller('ShowIssuesCtrl', function($scope, getListIssues, $routeParams) {
     $scope.number = $routeParams.number;
-    getListIssues.query().then(function(data) {
+    $scope.org = $routeParams.org;
+    $scope.repo = $routeParams.repo;
+    getListIssues.query($routeParams.org, $routeParams.repo).then(function(data) {
       $scope.any = data;
       var issue = $scope.any.filter(function(item) {
         return item.number == $scope.number;
       });
       if (!issue.length) return;
       $scope.issue = issue[0];
+      console.log($scope.issue);
     });
   });
 
@@ -41,38 +46,28 @@
         .when('/', {
           controller: 'SearchRepoCtrl'
         })
-        .when(':/org/:repo/issues', {
+        .when('/:number', {
+          controller: 'ShowIssuesCtrl',
+          templateUrl: 'template/showIssues.html'
+        })
+        .when('/:org/:repo/issues', {
           templateUrl: 'template/listIssues.html',
-          controller: 'GetListIssuesCtrl'
+          controller: 'GetIssuesCtrl'
         })
         .when('/:org/:repo/issues/:number', {
-          templateUrl: 'template/issues.html',
-          controller: 'IssuesCtrl'
+          templateUrl: 'template/showIssues.html',
+          controller: 'ShowIssuesCtrl'
         })
         .otherwise({
           temlpate: '<h1> NO page here<h1>'
         });
     }
   ]);
-  // get issues
-  app.service('parseUrl', function($location) {
-    var pathUrl = $location.$$path;
-    var regExp = /\/(\w+)\/(\w+)/;
-    var loc = pathUrl.match(regExp);
-    if (loc !== null) {
-      var org = loc[1];
-      var repo = loc[2];
-      return {
-        org: org,
-        repo: repo
-      };
-    }
 
-  });
-  app.factory('getListIssues', function($http, parseUrl) {
-    var url = 'https://api.github.com/repos/' + parseUrl.org + '/' + parseUrl.repo + '/issues';
+  app.factory('getListIssues', function($http) {
     return {
-      query: function() {
+      query: function(org, repo) {
+        var url = 'https://api.github.com/repos/' + org + '/' + repo + '/issues';
         return $http.get(url).then(function(res) {
           var list = angular.copy(res.data);
           // saveStorage();
