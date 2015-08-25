@@ -4,7 +4,7 @@
   var app = angular.module('gitApi', ['ngRoute', 'ngResource']);
 
   app.controller('GetIssuesCtrl', function($scope, getListIssues, $routeParams) {
-    $scope.startPage = true;
+    $scope.startPage = false;
     $scope.org = $routeParams.org;
     $scope.repo = $routeParams.repo;
     getListIssues.query($routeParams.org, $routeParams.repo).then(function(data) {
@@ -29,8 +29,11 @@
 
   // repo and org controller
   app.controller('SearchRepoCtrl', function($scope, $location) {
-    $scope.searchRepo = function() {
+    if ($location.$$hash == '') {
       $scope.startPage = true;
+    }
+    $scope.searchRepo = function() {
+      $scope.startPage = false;
       $location.path('/' + $scope.org + '/' + $scope.repo + '/issues');
     };
   });
