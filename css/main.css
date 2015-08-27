@@ -46,8 +46,8 @@ header {
 }
 
 img {
-    margin: 2%;
-    width: 14%;
+    margin: 12%;
+    width: 20%;
     float: left;
     box-shadow: 0 5px 5px rgba(244, 122, 167, .5);
 }
@@ -87,7 +87,10 @@ footer {
     margin: 0px;
 }
 
-.center {}
+.issue {
+    position: absolute;
+    background: #b2dfdb;
+}
 
 form {
     display: block;
@@ -99,8 +102,9 @@ form {
 }
 
 comments {
+    content: 'Not comment';
     float: left;
-    background-color: red;
+    background: #8bc34a;
     width: 37%
 }
 

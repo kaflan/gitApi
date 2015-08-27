@@ -2,6 +2,8 @@
 (function() {
   'use strict';
   var app = angular.module('gitApi', ['ngRoute', 'ngResource']);
+
+  // navigation controller
   app.controller('NavigateCtrl', function($scope, getListIssues, $routeParams) {
     getListIssues.query($routeParams.org, $routeParams.repo).then(function(data) {
       $scope.data = angular.copy(data);
@@ -18,7 +20,7 @@
     };
   });
 
-  // repo and org controller
+  // repo and org controller search
   app.controller('SearchRepoCtrl', function($scope, $location, getListIssues) {
     if ($location.$$path === '') {
       $scope.startPage = true;
@@ -31,24 +33,17 @@
       $location.path('/' + $scope.org + '/' + $scope.repo + '/issues');
     };
   });
-  app.controller('CommentsCtrl', function(getListComments, $scope, $routeParams, getListIssues) {
-    getListIssues.query($routeParams.org, $routeParams.repo).then(function(data) {
-      $scope.data = angular.copy(data);
-      var issue = $scope.data.filter(function(item) {
-        return item.number == $routeParams.number;
-      });
-      if (!issue.length) return;
-      $scope.issue = issue[0];
-    });
+
+  //show comments controller
+  app.controller('CommentsCtrl', function(getListComments, $scope, $routeParams) {
     if ($routeParams.number !== undefined) {
       getListComments.query($routeParams.org, $routeParams.repo, $routeParams.number).then(function(data) {
         $scope.comments = angular.copy(data);
+        console.log($scope.data);
       });
     }
   });
-
-
-
+  // directive  show  1 issue
   app.directive('issues', function() {
     return {
       controller: 'NavigateCtrl',
@@ -56,6 +51,7 @@
       templateUrl: 'template/showIssues.html'
     };
   });
+  // directive show all comments
   app.directive('comments', function() {
     return {
       controller: 'CommentsCtrl',
@@ -63,8 +59,6 @@
       templateUrl: 'template/comments.html'
     };
   });
-
-  // comments ctrl
 
   // config
   app.config(['$routeProvider',
@@ -74,11 +68,11 @@
           controller: 'SearchRepoCtrl'
         })
         .when('/:org/:repo/issues/', {
-          controller: 'NavigateCtrl',
+          // controller: 'NavigateCtrl',
           templateUrl: 'template/nav.html'
         })
         .when('/:org/:repo/issues/:number', {
-          controller: 'CommentsCtrl',
+          // controller: 'CommentsCtrl',
           templateUrl: 'template/nav.html'
         })
         .otherwise({
@@ -86,7 +80,7 @@
         });
     }
   ]);
-
+  // factory get issues list from git hub
   app.factory('getListIssues', function($http) {
     return {
       query: function(org, repo) {
@@ -98,7 +92,7 @@
       }
     };
   });
-
+  // factory get comments list from git hub
   app.factory('getListComments', function($http) {
     return {
       query: function(org, repo, number) {
