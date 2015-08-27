@@ -88,8 +88,12 @@ footer {
 }
 
 .issue {
-    position: absolute;
+    display: block;
+    border-radius: 4px;
+    content: '.';
     background: #b2dfdb;
+    border: 1px solid;
+    padding: 20px;
 }
 
 form {
@@ -109,12 +113,10 @@ comments {
 }
 
 issues {
-    display: block;
-    border-radius: 4px;
-    content: '.';
-    background: #b2dfdb;
-    border: 1px solid;
-    padding: 20px;
+    background: #8bc34a;
+    /*margin-top: 2%;*/
+    float: left;
+    width: 48%;
 }
 
 .content {
