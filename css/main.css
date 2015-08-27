@@ -109,9 +109,12 @@ comments {
 }
 
 issues {
-    width: 48%;
-    float: left;
-    background: #8bc34a;
+    display: block;
+    border-radius: 4px;
+    content: '.';
+    background: #b2dfdb;
+    border: 1px solid;
+    padding: 20px;
 }
 
 .content {

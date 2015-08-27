@@ -6,13 +6,13 @@
   // navigation controller
   app.controller('NavigateCtrl', function($scope, getListIssues, $routeParams) {
     getListIssues.query($routeParams.org, $routeParams.repo).then(function(data) {
-      $scope.data = angular.copy(data);
+      $scope.issues = angular.copy(data);
     });
     $scope.issuesItem = function() {
       $scope.number = $routeParams.number;
       $scope.org = $routeParams.org;
       $scope.repo = $routeParams.repo;
-      var issue = $scope.data.filter(function(item) {
+      var issue = $scope.issues.filter(function(item) {
         return item.number == $scope.number;
       });
       if (!issue.length) return;
@@ -39,8 +39,18 @@
     if ($routeParams.number !== undefined) {
       getListComments.query($routeParams.org, $routeParams.repo, $routeParams.number).then(function(data) {
         $scope.comments = angular.copy(data);
-        console.log($scope.data);
+        console.log('if work 1', $scope.issues);
+        var issue = $scope.issues.filter(function(item) {
+          return item.number == $routeParams.number;
+        });
+        // console.log('if work', $scope);
+
+        if (!issue.length) return;
+        $scope.issue = issue[0];
+        console.log('if work', $scope.issue);
       });
+      console.log('if work 2', $scope.issues);
+
     }
   });
   // directive  show  1 issue
