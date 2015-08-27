@@ -99,14 +99,13 @@ form {
 }
 
 comments {
-    position: absolute;
     float: left;
     background-color: red;
-    width: 23%;
+    width: 37%
 }
 
 issues {
-    width: 62%;
+    width: 48%;
     float: left;
     background: #8bc34a;
 }
