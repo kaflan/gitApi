@@ -1,14 +1,24 @@
 (function() {
   'use strict';
-  var app = module('gitApi');
-  var list;
-  app.factory('getListIssues', function($http, parseUrl) {
-    var url = 'https://api.github.com/repos/' + parseUrl.org + '/' + parseUrl.repo + '/issues';
+  angular.module('gitFactory', [])
+    .factory('getListIssues', function($http) {
+      return {
+        query: function(org, repo) {
+          var url = 'https://api.github.com/repos/' + org + '/' + repo + '/issues';
+          return $http.get(url).then(function(res) {
+            var list = angular.copy(res.data);
+            return list;
+          });
+        }
+      };
+    });
+  // factory get comments list from git hub
+  angular.module('gitApi').factory('getListComments', function($http) {
     return {
-      query: function() {
+      query: function(org, repo, number) {
+        var url = 'https://api.github.com/repos/' + org + '/' + repo + '/issues' + '/' + number + '/' + 'comments';
         return $http.get(url).then(function(res) {
-          list = angular.copy(res.data);
-          // list = $scope.data;
+          var list = angular.copy(res.data);
           return list;
         });
       }

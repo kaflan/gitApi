@@ -1,22 +1,23 @@
 (function() {
   'use strict';
-  var app = angular.module('gitApi');
-  //config
-  app.config(['$routeProvider',
-    function($routeProvider) {
-      //costile 
-      $routeProvider
-        .when(':/org/:repo/issues', {
-          templateUrl: 'template/nav.html',
-          controller: 'ListIssuesCtrl'
-        })
-        .when('/:org/:repo/issues/:number', {
-          templateUrl: 'template/issues.html',
-          controller: 'IssuesCtrl'
-        })
-        .otherwise({
-          temlpate: '<h1> NO page here<h1>'
-        });
-    }
-  ]);
+  angular.module('gitApiConfig', [])
+    .config(['$routeProvider',
+      function($routeProvider) {
+        $routeProvider
+          .when('/', {
+            controller: 'SearchRepoCtrl'
+          })
+          .when('/:org/:repo/issues/', {
+            // controller: 'NavigateCtrl',
+            templateUrl: 'template/nav.html'
+          })
+          .when('/:org/:repo/issues/:number', {
+            // controller: 'CommentsCtrl',
+            templateUrl: 'template/nav.html'
+          })
+          .otherwise({
+            temlpate: '<h1> NO page here<h1>'
+          });
+      }
+    ]);
 })();
