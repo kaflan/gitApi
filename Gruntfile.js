@@ -17,13 +17,22 @@ module.exports = function(grunt) {
       options: {
         separator: ';'
       },
-      src: ['css/colum.sass', 'css/button.sass', 'animation.sass'],
-      dest: 'css/main.sass'
+      files: [{
+        expand: true,
+        cwd: 'styles',
+        src: ['*.css', , '!*.min.css'],
+        dest: 'css/'
+      }]
     },
     sass: {
       dist: {
-        src: ['css/main.css'],
-        dest: 'css/main.scss'
+        files: [{
+          expand: true,
+          cwd: 'styles',
+          src: ['*.scss'],
+          dest: 'css/',
+          ext: '.css'
+        }]
       }
     },
     cssmin: {
@@ -31,7 +40,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'css/',
-          src: ['main.css', '!*.min.css'],
+          src: ['*.css', '!*.min.css'],
           dest: 'css/',
           ext: '.min.css'
         }]
@@ -40,8 +49,7 @@ module.exports = function(grunt) {
     livereload: {
       options: {
         livereload: true
-      },
-      files: ['../**/*']
+      }
     },
     connect: {
       server: {
