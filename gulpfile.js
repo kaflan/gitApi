@@ -15,14 +15,12 @@ var ngAnnotate = require('gulp-ng-annotate');
 gulp.task('js', function() {
   gulp.src('js/*.js')
     .pipe(sourcemaps.init())
-    .pipe(concat('app.js', {
-      newLine: ';'
-    }))
+    .pipe(concat('app.js'))
     .pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('js/'))
-})
+});
 
 gulp.task('bower', function() {
   gulp.src('index.html')
