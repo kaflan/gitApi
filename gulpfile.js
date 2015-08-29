@@ -15,7 +15,9 @@ var ngAnnotate = require('gulp-ng-annotate');
 gulp.task('js', function() {
   gulp.src('js/*.js')
     .pipe(sourcemaps.init())
-    .pipe(concat('app.js'))
+    .pipe(concat('app.js', {
+      newLine: ';'
+    }))
     .pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(sourcemaps.write())
