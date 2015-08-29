@@ -9,6 +9,19 @@ var livereload = require('gulp-livereload');
 var autoprefixer = require('gulp-autoprefixer');
 var uncss = require('gulp-uncss');
 var wiredep = require('wiredep').stream;
+var sourcemaps = require('gulp-sourcemaps');
+var uglify = require('gulp-uglify');
+var ngAnnotate = require('gulp-ng-annotate');
+gulp.task('js', function() {
+  gulp.src('js/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(concat('app.js'))
+    .pipe(ngAnnotate())
+    .pipe(uglify())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('js/'))
+})
+
 gulp.task('bower', function() {
   gulp.src('index.html')
     .pipe(wiredep({
@@ -34,4 +47,4 @@ gulp.task('connect', function() {
 gulp.task('watch', function() {
   gulp.watch('css/*.css');
 });
-gulp.task('default', ['concat', 'connect', 'watch', 'bower']);
+gulp.task('default', ['concat', 'connect', 'watch', 'bower', 'js']);
