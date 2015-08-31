@@ -24,5 +24,10 @@
           });
         }
       };
+    })
+    .factory('getNextPage', function() {
+      return function query(org, repo, number) {
+        var url = '';
+      };
     });
 })();

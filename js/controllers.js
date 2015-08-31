@@ -2,7 +2,7 @@
 (function() {
   'use strict';
   // navigation controller
-  angular.module('gitApiCtrl', [])
+  angular.module('gitApiCtrl', ['gitFactory'])
     .controller('NavigateCtrl', function($scope, getListIssues, $routeParams) {
       getListIssues.query($routeParams.org, $routeParams.repo).then(function(data) {
         $scope.issues = angular.copy(data);
