@@ -21,9 +21,10 @@
 
   // repo and org controller search
   .controller('SearchRepoCtrl', function($scope, $location, getListIssues) {
-    if ($location.$$path === '') {
-      $scope.startPage = true;
-    }
+    // if ($location.$$path === '') {
+    //   $scope.startPage = true;
+    // }
+
     $scope.searchRepo = function() {
       getListIssues.query($scope.org, $scope.repo).then(function(data) {
         $scope.data = angular.copy(data);
@@ -42,14 +43,14 @@
         var issue = $scope.issues.filter(function(item) {
           return item.number == $routeParams.number;
         });
-        // console.log('if work', $scope);
-
         if (!issue.length) return;
         $scope.issue = issue[0];
-        console.log('if work', $scope.issue);
       });
-      console.log('if work 2', $scope.issues);
-
     }
+  })
+
+  //pages controller
+  .controller('PageCtrl', function(getNextPage, $scope, $routeParams) {
+    getNextPage.query().then();
   });
 })();

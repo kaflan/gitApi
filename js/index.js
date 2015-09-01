@@ -12,6 +12,7 @@
       function($routeProvider) {
         $routeProvider
           .when('/', {
+            templateUrl: 'template/search.html',
             controller: 'SearchRepoCtrl'
           })
           .when('/:org/:repo/issues/', {
@@ -21,10 +22,11 @@
           .when('/:org/:repo/issues/:number', {
             // controller: 'CommentsCtrl',
             templateUrl: 'template/nav.html'
-          })
-          .otherwise({
-            temlpate: '<h1> NO page here<h1>'
           });
+          // .otherwise({
+      //   temlpate: '<h1> NO page here<h1>'
+      // });
+
       }
     ]);
   // factory

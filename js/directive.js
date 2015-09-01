@@ -18,6 +18,13 @@
         templateUrl: 'template/comments.html'
       };
     })
+    .directive('search', function() {
+      return {
+        controller: 'SearchRepoCtrl',
+        restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
+        templateUrl: 'template/search.html'
+      };
+    })
     .directive('pages', function() {
       // Runs during compile
       return {
