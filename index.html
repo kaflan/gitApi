@@ -4,28 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Api issues</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.min.css">
     <script src="bower_components/jquery/dist/jquery.js"></script>
 </head>
+<!-- ng-controller="SearchRepoCtrl" -->
 
 <body>
-    <div ng-controller="SearchRepoCtrl">
-        <div ng-show='startPage' class="form-main ">
-            <form ng-submit="searchRepo()">
-                <div class="col-6">
-                    <input type="text" ng-model="org" placeholder="Name of organization" />
-                </div>
-                <div class="col-6">
-                    <input type="text" ng-model="repo" placeholder="Repository of organization" />
-                </div>
-                <div class="col-offset-3 col-3">
-                    <input type="submit" value='Search repo'>
-                </div>
-            </form>
-        </div>
-        <div ng-hide='startPage'>
-        </div>
-    </div>
     <div ng-view></div>
     <!-- bower:js -->
     <script src="bower_components/angular/angular.js"></script>

@@ -12,6 +12,7 @@ var wiredep = require('wiredep').stream;
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var ngAnnotate = require('gulp-ng-annotate');
+var gulpif = require('gulp-if');
 gulp.task('js', function() {
   gulp.src('js/*.js')
     .pipe(sourcemaps.init())
@@ -21,7 +22,14 @@ gulp.task('js', function() {
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('js/'))
 });
-
+gulp.task('minify-css', function() {
+  return gulp.src('css/*.css')
+    .pipe(sourcemaps.init())
+    .pipe(minifyCss())
+    .pipe(rename('main.min.css'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('css/'));
+});
 gulp.task('bower', function() {
   gulp.src('index.html')
     .pipe(wiredep({
@@ -29,16 +37,14 @@ gulp.task('bower', function() {
     }))
     .pipe(gulp.dest('./'));
 });
-gulp.task('concat', function() {
-  gulp.src('css/*.css')
-    .pipe(concat('style.css'))
-    .pipe(autoprefixer('> 1%', 'last 12 versions', 'ie 9'))
-    .pipe(minifyCss(''))
-    .pipe(rename('bundle.min.css'))
+gulp.task('sass', function() {
+  gulp.src('css/bundle.scss')
+    .pipe(sass())
     .pipe(gulp.dest('css/'))
     .pipe(connect.reload())
     .pipe(notify('Done!'));
 });
+
 gulp.task('connect', function() {
   connect.server({
     livereload: true
@@ -47,4 +53,4 @@ gulp.task('connect', function() {
 gulp.task('watch', function() {
   gulp.watch('css/*.css');
 });
-gulp.task('default', ['concat', 'connect', 'watch', 'bower', 'js']);
+gulp.task('default', ['concat', 'connect', 'watch', 'bower', 'minify-css', 'js']);
