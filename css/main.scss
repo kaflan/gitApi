@@ -1,0 +1,65 @@
+    nav {
+        float: left
+    }
+    
+    nav>ul>li,
+    p {
+        overflow-wrap: break-word
+    }
+    
+    nav>ul,
+    nav>ul>li,
+    nav>ul>li>a {
+        list-style-type: none;
+        text-decoration: none
+    }
+    
+    .no-decoration,
+    nav>ul,
+    nav>ul>li,
+    nav>ul>li>a {
+        text-decoration: none
+    }
+    
+    body,
+    h1 {
+        font-family: 1em 'PT sans', Arial
+    }
+    
+    nav {
+        width: 15%;
+        background-color: #00796b
+    }
+    
+    .no-decoration {
+        color: #4a1313;
+        padding: 0;
+        margin: 0
+    }
+    
+    .issue {
+        border-radius: 4px;
+        content: '.';
+        background: #b2dfdb;
+        border: 1px solid;
+        padding: 20px
+    }
+    
+    comments,
+    issues {
+        float: left
+    }
+    
+    .form-main {
+        margin-top: 10%;
+        margin-left: 20%
+    }
+    
+    comments {
+        content: 'Not comment';
+        width: 37%
+    }
+    
+    issues {
+        width: 48%
+    }
