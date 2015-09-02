@@ -1,7 +1,8 @@
-<nav class='row'>
+<nav>
     <ul class='no-decoration'>
-        <li ng-repeat="item in issues"><a href="#/{{org}}/{{repo}}/issues/{{item.number}}" ng-click="issuesItem()">{{item.title}}</a></li>
+        <li ng-repeat="item in issues"><a ng-href="#/{{org}}/{{repo}}/issues/{{item.number}}" ng-click="issuesItem()">{{item.title}}</a></li>
     </ul>
 </nav>
 <issues></issues>
 <comments></comments>
+<pages></pages>

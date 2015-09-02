@@ -27,7 +27,7 @@
     })
     .factory('getNextPage', function($http) {
       return function query(org, repo, number) {
-        var url = ' https: //api.github.com/repos/' + org + '/' + repo + '/issues\?page\=' + number;
+        var url = 'https: //api.github.com/repos/' + org + '/' + repo + '/issues\?page\=' + number;
         return $http.get(url).then(function(res) {
           var list = angular.copy(res.data);
           return list;

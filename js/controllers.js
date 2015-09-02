@@ -1,6 +1,7 @@
 ;
 (function() {
   'use strict';
+
   // navigation controller
   angular.module('gitApiCtrl', ['gitFactory'])
     .controller('NavigateCtrl', function($scope, getListIssues, $routeParams) {
@@ -21,15 +22,10 @@
 
   // repo and org controller search
   .controller('SearchRepoCtrl', function($scope, $location, getListIssues) {
-    // if ($location.$$path === '') {
-    //   $scope.startPage = true;
-    // }
-
     $scope.searchRepo = function() {
       getListIssues.query($scope.org, $scope.repo).then(function(data) {
-        $scope.data = angular.copy(data);
+        $scope.issues = angular.copy(data);
       });
-      $scope.startPage = false;
       $location.path('/' + $scope.org + '/' + $scope.repo + '/issues');
     };
   })
@@ -51,6 +47,21 @@
 
   //pages controller
   .controller('PageCtrl', function(getNextPage, $scope, $routeParams) {
-    getNextPage.query().then();
+    $scope.issuesList = [];
+    $scope.page = 1;
+    getNextPage.query($routeParams.org, $routeParams.repo, $scope.page).then(function(data) {
+      $scope.pageList = angular.copy(data);
+    });
+    $scope.previosPage = function() {
+      if ($scope.page === 1) {
+        return;
+      }
+      $scope.page = $scope.page - 1;
+    };
+    $scope.nextPage = function() {
+      $scope.page = $scope.page + 1;
+    };
+    // var url = 'https: //api.github.com/repos/' + org + '/' + repo + '/issues\?page\=' + number;
+
   });
 })();

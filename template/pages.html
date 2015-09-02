@@ -1,5 +1,14 @@
 <nav>
-    <ol ng-init="">
-        <li ng-repeat="page in pages">{{page}}</li>
-    </ol>
+    <ul class="pagination">
+        <li>
+            <a ng-href="#/{{org}}/{{repo}}/issues/pages/{{page}}" aria-label="Previous" ng-click="previosPage()">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li>
+            <a ng-href="#/{{org}}/{{repo}}/issues/pages/{{page}}" aria-label="Next" ng-click="nextPage()">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
 </nav>
