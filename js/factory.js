@@ -4,11 +4,22 @@
   angular.module('gitFactory', [])
     .factory('getListIssues', function($http) {
       return {
+        issues: [],
         query: function(org, repo) {
-          var url = 'https://api.github.com/repos/' + org + '/' + repo + '/issues';
+          return queryPage(org, repo, 1);
+        },
+        queryPage: function(org, repo, page) {
+          var self = this;
+          // cache
+          if (this.issues[page]) {
+            return $q(function(resolve) {
+              resolve(self.issues[page]);
+            });
+          }
+          var url = 'https://api.github.com/repos/' + org + '/' + repo + '/issues/?page\=' + page;
           return $http.get(url).then(function(res) {
             var list = angular.copy(res.data);
-            return list;
+            return self.issues[page] = list;
           });
         }
       };
@@ -23,15 +34,6 @@
             return list;
           });
         }
-      };
-    })
-    .factory('getNextPage', function($http) {
-      return function query(org, repo, number) {
-        var url = 'https: //api.github.com/repos/' + org + '/' + repo + '/issues\?page\=' + number;
-        return $http.get(url).then(function(res) {
-          var list = angular.copy(res.data);
-          return list;
-        });
       };
     });
 })();

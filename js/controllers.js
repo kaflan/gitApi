@@ -46,26 +46,26 @@
   })
 
   //pages controller
-  .controller('PageCtrl', function(getNextPage, $scope, $routeParams) {
+  .controller('PageCtrl', function(getListIssues, $scope, $routeParams) {
     $scope.issuesList = {};
     $scope.page = 1;
     $scope.previosPage = function() {
       if ($scope.page === 1) {
         return;
       }
-      $scope.page = $scope.page - 1;
+      $scope.page--;
 
-      $scope.issuesList[$scope.page];
+      $scope.issuesList[$scope.page] = $scope.page;
       console.log($scope.issuesList);
     };
     $scope.nextPage = function() {
-      $scope.page = $scope.page + 1;
-      $scope.issuesList[$scope.page];
+      $scope.page++;
+      $scope.issuesList[$scope.page] = $scope.page;
       console.log($scope.issuesList);
-      // getNextPage.query($routeParams.org, $routeParams.repo, $scope.page).then(function(data) {
-      //   $scope.issuesList[$scope.page] = angular.copy(data);
-      //   console.log($scope.issuesList);
-      // });
+      getListIssues.queryPage($routeParams.org, $routeParams.repo, $scope.page).then(function(data) {
+        $scope.issuesList[$scope.page] = angular.copy(data);
+        console.log($scope.issuesList);
+      });
 
     };
     // var url = 'https: //api.github.com/repos/' + org + '/' + repo + '/issues\?page\=' + number;
