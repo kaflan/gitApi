@@ -2,11 +2,11 @@
 (function() {
   'use strict';
   angular.module('gitFactory', [])
-    .factory('getListIssues', function($http) {
+    .factory('getListIssues', function($http, $q) {
       return {
         issues: [],
         query: function(org, repo) {
-          return queryPage(org, repo, 1);
+          return this.queryPage(org, repo, 1);
         },
         queryPage: function(org, repo, page) {
           var self = this;
@@ -16,7 +16,7 @@
               resolve(self.issues[page]);
             });
           }
-          var url = 'https://api.github.com/repos/' + org + '/' + repo + '/issues/?page\=' + page;
+          var url = 'https://api.github.com/repos/' + org + '/' + repo + '/issues\?page\=' + page;
           return $http.get(url).then(function(res) {
             var list = angular.copy(res.data);
             return self.issues[page] = list;

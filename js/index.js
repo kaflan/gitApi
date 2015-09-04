@@ -16,16 +16,16 @@
             controller: 'SearchRepoCtrl'
           })
           .when('/:org/:repo/issues/', {
-            // controller: 'NavigateCtrl',
+            // controller: 'ListIessuesCtrl',
             templateUrl: 'template/nav.html'
           })
           .when('/:org/:repo/issues/:number', {
             // controller: 'CommentsCtrl',
             templateUrl: 'template/nav.html'
+          })
+          .otherwise({
+            temlpate: '<h1> NO page here<h1>'
           });
-          // .otherwise({
-      //   temlpate: '<h1> NO page here<h1>'
-      // });
 
       }
     ]);

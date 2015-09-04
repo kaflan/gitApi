@@ -2,21 +2,22 @@
 (function() {
   'use strict';
 
-  // navigation controller
+  // list navigation controller
   angular.module('gitApiCtrl', ['gitFactory'])
-    .controller('NavigateCtrl', function($scope, getListIssues, $routeParams) {
+    .controller('ListIessuesCtrl', function($scope, getListIssues, $routeParams) {
       getListIssues.query($routeParams.org, $routeParams.repo).then(function(data) {
         $scope.issues = angular.copy(data);
       });
-      $scope.issuesItem = function() {
-        $scope.number = $routeParams.number;
-        $scope.org = $routeParams.org;
-        $scope.repo = $routeParams.repo;
+      $scope.org = $routeParams.org;
+      $scope.repo = $routeParams.repo;
+      if ($routeParams.number) $scope.number = $routeParams.number;
+      $scope.getIssues = function() {
         var issue = $scope.issues.filter(function(item) {
           return item.number == $scope.number;
         });
         if (!issue.length) return;
         $scope.issue = issue[0];
+        console.log($scope.issue);
       };
     })
 
@@ -35,12 +36,6 @@
     if ($routeParams.number !== undefined) {
       getListComments.query($routeParams.org, $routeParams.repo, $routeParams.number).then(function(data) {
         $scope.comments = angular.copy(data);
-        console.log('if work 1', $scope.issues);
-        var issue = $scope.issues.filter(function(item) {
-          return item.number == $routeParams.number;
-        });
-        if (!issue.length) return;
-        $scope.issue = issue[0];
       });
     }
   })
@@ -54,17 +49,16 @@
         return;
       }
       $scope.page--;
-
-      $scope.issuesList[$scope.page] = $scope.page;
+      // $scope.issuesList[$scope.page] = $scope.issues;
+      $scope.issues = $scope.issuesList[$scope.page];
       console.log($scope.issuesList);
     };
     $scope.nextPage = function() {
       $scope.page++;
-      $scope.issuesList[$scope.page] = $scope.page;
       console.log($scope.issuesList);
       getListIssues.queryPage($routeParams.org, $routeParams.repo, $scope.page).then(function(data) {
         $scope.issuesList[$scope.page] = angular.copy(data);
-        console.log($scope.issuesList);
+        $scope.issues = $scope.issuesList[$scope.page];
       });
 
     };

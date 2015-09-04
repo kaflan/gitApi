@@ -1,7 +1,7 @@
 <h1>Issue {{issue.number}}</h1>
 <div>
-    <img class="img-circle col-1" ng-src="{{issue.user.avatar_url}}" alt="{{issue.user.login}}">
+    <img class="img-circle" ng-src="{{issue.user.avatar_url}}" alt="{{issue.user.login}}">
     <!-- <p class="issue" ng-if="{{issue.locked}}"> Open issue</p> -->
-    <h4 class="col-5">{{issue.user.login}}</h4>
+    <h4>{{issue.user.login}}</h4>
     <p class="col-6">{{issue.body}}</p>
 </div>

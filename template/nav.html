@@ -1,6 +1,8 @@
 <nav>
     <ul class='no-decoration'>
-        <li ng-repeat="item in issues"><a ng-href="#/{{org}}/{{repo}}/issues/{{item.number}}" ng-click="issuesItem()">{{item.title}}</a></li>
+        <!--   body='{{item.body}}' avatar='{{item.user.avatar_url}}' login="{{item.user.login}}"-->
+        <li ng-repeat="item in issues"><a ng-href="#/{{org}}/{{repo}}/issues/{{item.number}}" ng-click="getIssues()">{{item.title}}
+        </a></li>
     </ul>
 </nav>
 <issues></issues>

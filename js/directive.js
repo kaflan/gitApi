@@ -5,9 +5,10 @@
   angular.module('gitDerective', ['gitApiCtrl'])
     .directive('issues', function() {
       return {
-        controller: 'NavigateCtrl',
+        controller: 'ListIessuesCtrl',
         restrict: 'E',
         templateUrl: 'template/showIssues.html'
+
       };
     })
     // directive show all comments
