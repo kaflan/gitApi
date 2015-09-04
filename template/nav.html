@@ -1,7 +1,7 @@
 <nav>
     <ul class='no-decoration'>
         <!--   body='{{item.body}}' avatar='{{item.user.avatar_url}}' login="{{item.user.login}}"-->
-        <li ng-repeat="item in issues"><a ng-href="#/{{org}}/{{repo}}/issues/{{item.number}}" ng-click="getIssues()">{{item.title}}
+        <li ng-repeat="item in issues"><a ng-href="#/{{org}}/{{repo}}/issues/{{item.number}}">{{item.title}}
         </a></li>
     </ul>
 </nav>

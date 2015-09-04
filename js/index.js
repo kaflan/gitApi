@@ -16,12 +16,13 @@
             controller: 'SearchRepoCtrl'
           })
           .when('/:org/:repo/issues/', {
-            // controller: 'ListIessuesCtrl',
+            controller: 'ListIessuesCtrl',
             templateUrl: 'template/nav.html'
           })
           .when('/:org/:repo/issues/:number', {
-            // controller: 'CommentsCtrl',
+            // controller: 'IssueCtrl',
             templateUrl: 'template/nav.html'
+              // controllerAs: 'ListIessuesCtrl'
           })
           .otherwise({
             temlpate: '<h1> NO page here<h1>'

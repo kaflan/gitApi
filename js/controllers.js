@@ -5,21 +5,23 @@
   // list navigation controller
   angular.module('gitApiCtrl', ['gitFactory'])
     .controller('ListIessuesCtrl', function($scope, getListIssues, $routeParams) {
-      getListIssues.query($routeParams.org, $routeParams.repo).then(function(data) {
-        $scope.issues = angular.copy(data);
-      });
       $scope.org = $routeParams.org;
       $scope.repo = $routeParams.repo;
-      if ($routeParams.number) $scope.number = $routeParams.number;
-      $scope.getIssues = function() {
-        var issue = $scope.issues.filter(function(item) {
-          return item.number == $scope.number;
+      $scope.issues;
+      getListIssues.query($routeParams.org, $routeParams.repo)
+        .then(function(data) {
+          $scope.issues = angular.copy(data);
+          if ($routeParams.number) {
+            $scope.number = $routeParams.number;
+            var issue = $scope.issues.filter(function(item) {
+              return item.number == $scope.number;
+            });
+            if (!issue.length) return;
+            $scope.issue = issue[0];
+          }
         });
-        if (!issue.length) return;
-        $scope.issue = issue[0];
-        console.log($scope.issue);
-      };
     })
+
 
   // repo and org controller search
   .controller('SearchRepoCtrl', function($scope, $location, getListIssues) {

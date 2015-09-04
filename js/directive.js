@@ -8,7 +8,6 @@
         controller: 'ListIessuesCtrl',
         restrict: 'E',
         templateUrl: 'template/showIssues.html'
-
       };
     })
     // directive show all comments
