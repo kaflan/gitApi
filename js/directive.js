@@ -13,9 +13,19 @@
     // directive show all comments
     .directive('comments', function() {
       return {
+        scope: {
+          body: '='
+        },
+        // replace: true,
         controller: 'CommentsCtrl',
         restrict: 'E',
-        templateUrl: 'template/comments.html'
+        templateUrl: 'template/comments.html',
+        link: function(scope, element, attr) {
+          console.log(scope, element, attr);
+          // console.log(scope.$watch());
+          // scope.body = marked(scope.body);
+          // console.log(scope.body);
+        }
       };
     })
     .directive('search', function() {

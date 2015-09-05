@@ -3,7 +3,7 @@
   'use strict';
 
   // list navigation controller
-  angular.module('gitApiCtrl', ['gitFactory'])
+  angular.module('gitApiCtrl', ['gitFactory', 'hc.marked'])
     .controller('ListIessuesCtrl', function($scope, getListIssues, $routeParams) {
       $scope.org = $routeParams.org;
       $scope.repo = $routeParams.repo;
@@ -38,6 +38,8 @@
     if ($routeParams.number !== undefined) {
       getListComments.query($routeParams.org, $routeParams.repo, $routeParams.number).then(function(data) {
         $scope.comments = angular.copy(data);
+        // console.log(marked($scope.comments));
+
       });
     }
   })

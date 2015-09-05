@@ -1,7 +1,7 @@
 /* angular Global*/ ;
 (function() {
   'use strict';
-  angular.module('gitApi', ['ngRoute', 'gitDerective', 'gitApiCtrl', 'gitFactory']);
+  angular.module('gitApi', ['ngRoute', 'gitDerective', 'gitApiCtrl', 'gitFactory', 'hc.marked', 'gitApiFilter']);
   //controllers
 
   //directives
@@ -27,9 +27,12 @@
           .otherwise({
             temlpate: '<h1> NO page here<h1>'
           });
-
       }
-    ]);
-  // factory
+    ])
+    .config(['markedProvider', function(markedProvider) {
+      markedProvider.setOptions({
+        gfm: true
+      });
+    }]);
 })();
 // curl https: //api.github.com/repos/codeception/codeception/issues\?page\=5
