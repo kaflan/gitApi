@@ -3,7 +3,7 @@
     <img class="  img-circle" ng-src="{{issue.user.avatar_url}}" alt="{{issue.user.login}}">
     <!-- <p class="issue" ng-if="{{issue.locked}}"> Open issue</p> -->
     <h4 class="col-sm-6 opacity">{{issue.user.login}}</h4>
-    <p class="col-sm-6" body="{{issues}}">
-        {{ issue.body }}
+    <p class="col-sm-6">
+        {{issue.body | htmlParser}}
     </p>
 </div>

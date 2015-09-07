@@ -1,7 +1,7 @@
 /* angular Global*/ ;
 (function() {
   'use strict';
-  angular.module('gitApi', ['ngRoute', 'gitDerective', 'gitApiCtrl', 'gitFactory', 'hc.marked', 'gitApiFilter']);
+  angular.module('gitApi', ['ngRoute', 'gitDerective', 'gitApiCtrl', 'gitFactory', 'hc.marked', 'gitApiFilter', 'btford.markdown']);
   //controllers
 
   //directives
