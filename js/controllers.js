@@ -33,18 +33,16 @@
     };
   })
 
-  //show comments controller
+  // show comments controller
   .controller('CommentsCtrl', function(getListComments, $scope, $routeParams) {
     if ($routeParams.number !== undefined) {
       getListComments.query($routeParams.org, $routeParams.repo, $routeParams.number).then(function(data) {
         $scope.comments = angular.copy(data);
-        // console.log(marked($scope.comments));
-
       });
     }
   })
 
-  //pages controller
+  // pages controller
   .controller('PageCtrl', function(getListIssues, $scope, $routeParams) {
     $scope.issuesList = {};
     $scope.page = 1;
@@ -69,4 +67,5 @@
     // var url = 'https: //api.github.com/repos/' + org + '/' + repo + '/issues\?page\=' + number;
 
   });
+
 })();

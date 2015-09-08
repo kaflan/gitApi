@@ -2,7 +2,6 @@
 <aside class="container row bottom">
     <img class="img-circle" ng-src="{{comment.user.avatar_url}}" alt="{{comment.user.avatar_url}}">
     <h4 class=" col-md-6 opacity">{{comment.user.login}}</h4>
-    <p class="col-md-6">
-        {{comment.body | htmlParser}}
+    <p class="col-md-6" ng-bind-html="comment.body | htmlParser">
     </p>
 </aside>
