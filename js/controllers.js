@@ -35,9 +35,12 @@
 
   // show comments controller
   .controller('CommentsCtrl', function(getListComments, $scope, $routeParams) {
+    console.log('work');
     if ($routeParams.number !== undefined) {
       getListComments.query($routeParams.org, $routeParams.repo, $routeParams.number).then(function(data) {
         $scope.comments = angular.copy(data);
+        // $scope.comments = $scope.comments['0'];
+        console.log(Object.keys($scope.comments));
       });
     }
   })
