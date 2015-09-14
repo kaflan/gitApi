@@ -31,5 +31,12 @@
         restrict: 'E',
         templateUrl: 'template/pages.html'
       };
+    })
+    .directive('github', function() {
+      return {
+        controller: '',
+        restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
+        templateUrl: 'template/github.html'
+      };
     });
 })();
