@@ -1,9 +1,8 @@
-;
 (function() {
   'use strict';
   // directive  show  1 issue
   angular.module('gitDerective', ['gitApiCtrl'])
-    .directive('issues', function($sce) {
+    .directive('issues', function() {
       return {
         controller: 'ListIessuesCtrl',
         restrict: 'E',
@@ -34,7 +33,7 @@
     })
     .directive('github', function() {
       return {
-        controller: '',
+        controller: 'GitAccesCtrl',
         restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
         templateUrl: 'template/github.html'
       };

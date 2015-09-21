@@ -1,10 +1,10 @@
-/* angular Global*/ ;
+ /* angular Global*/
 (function() {
   'use strict';
   angular.module('gitApi', ['ngRoute', 'gitDerective', 'gitApiCtrl', 'gitFactory', 'hc.marked', 'gitApiFilter']);
   //controllers
 
-  //directives
+  //directives'
 
   // config
   angular.module('gitApi')

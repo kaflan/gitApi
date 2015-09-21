@@ -1,13 +1,10 @@
-;
 (function() {
   'use strict';
-
   // list navigation controller
   angular.module('gitApiCtrl', ['gitFactory', 'hc.marked'])
     .controller('ListIessuesCtrl', function($scope, getListIssues, $routeParams) {
       $scope.org = $routeParams.org;
       $scope.repo = $routeParams.repo;
-      $scope.issues;
       getListIssues.query($routeParams.org, $routeParams.repo)
         .then(function(data) {
           $scope.issues = angular.copy(data);
@@ -54,11 +51,9 @@
       $scope.page--;
       // $scope.issuesList[$scope.page] = $scope.issues;
       $scope.issues = $scope.issuesList[$scope.page];
-      console.log($scope.issuesList);
     };
     $scope.nextPage = function() {
       $scope.page++;
-      console.log($scope.issuesList);
       getListIssues.queryPage($routeParams.org, $routeParams.repo, $scope.page).then(function(data) {
         $scope.issuesList[$scope.page] = angular.copy(data);
         $scope.issues = $scope.issuesList[$scope.page];
@@ -67,6 +62,8 @@
     };
     // var url = 'https: //api.github.com/repos/' + org + '/' + repo + '/issues\?page\=' + number;
 
+  })
+  .controller('GitAccesCtrl', function(){
+    
   });
-
 })();
