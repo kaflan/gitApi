@@ -2,11 +2,6 @@
 (function() {
   'use strict';
   angular.module('gitApi', ['ngRoute', 'gitDerective', 'gitApiCtrl', 'gitFactory', 'hc.marked', 'gitApiFilter']);
-  //controllers
-
-  //directives'
-
-  // config
   angular.module('gitApi')
     .config(['$routeProvider',
       function($routeProvider) {
@@ -36,3 +31,4 @@
     }]);
 })();
 // curl https: //api.github.com/repos/codeception/codeception/issues\?page\=5
+// GET https://github.com/login/oauth/authorize
