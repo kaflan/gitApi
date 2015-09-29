@@ -1,12 +1,28 @@
 (function() {
   'use strict';
   var http = require('http');
-  var server = http.createServer(function(req, res) {
-    res.writeHead(200, {
-      'Content-Type': 'text/html'
-    });
-    res.end('<h1> Hello</h1>');
-  });
   var port = Number(process.env.PORT || 3000);
+  var _ = require('lodash');
+
+  function renderResponse(res, code, body) {
+    res.writeHead(code, {
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Connection': 'keep-alive',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'HEAD, GET, POST, PUT, DELETE, OPTIONS'
+    });
+    res.end(body);
+  }
+  var server = http.createServer(function getReqRes(req, res) {
+    var outhGithub = {
+      GET: function() {
+        renderResponse(res, 200, '');
+      }
+    };
+
+
+  });
   server.listen(port);
 })();
