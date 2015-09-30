@@ -11,17 +11,6 @@
   var GITHUB_CLIENT_ID = '--insert-github-client-id-here--';
   var GITHUB_CLIENT_SECRET = '--insert-github-client-secret-here--';
 
-  function renderResponse(res, code, body) {
-    res.writeHead(code, {
-      'Accept': '*/*',
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Connection': 'keep-alive',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'HEAD, GET, POST, PUT, DELETE, OPTIONS'
-    });
-    res.end(body);
-  }
   app.use(express.static(__dirname + '/publick'));
   passport.serializeUser(function(user, done) {
     done(null, user);
