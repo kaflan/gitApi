@@ -38,7 +38,7 @@
   ));
 
   // app.listen(port);
-  app.listen(port, function(){
+  app.listen(process.env.PORT || 9000, function(){
   console.log('listening on', http.address().port);
 });
   console.log('server Server running at ' + port);
