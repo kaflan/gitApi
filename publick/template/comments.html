@@ -1,0 +1,9 @@
+<div>
+    <h3>Comments</h3>
+    <aside class="row " ng-repeat="comment in comments">
+        <img class="img-codeception img-circle" ng-src="{{comment.user.avatar_url}}" alt="{{comment.user.avatar_url}}">
+        <h4 class=" col-sm-6 opacity">{{comment.user.login}}</h4>
+        <p class="col-sm-6 bottom" ng-bind-html="comment.body | htmlParser">
+        </p>
+    </aside>
+</div>
