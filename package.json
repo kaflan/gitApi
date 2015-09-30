@@ -28,6 +28,7 @@
     "wiredep": "^2.2.2"
   },
   "dependencies": {
+    "express": "4.13.3",
     "wiredep": "^2.2.2"
   }
 }
