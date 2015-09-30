@@ -37,7 +37,10 @@
     }
   ));
 
-  app.listen(port);
+  // app.listen(port);
+  app.listen(port, function(){
+  console.log('listening on', http.address().port);
+});
   console.log('server Server running at ' + port);
   app.get('/', function(req, res) {
     res.render('index');
